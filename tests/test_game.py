@@ -1,7 +1,7 @@
 
 import unittest
 
-from game import new_game, move_player, ISLAND_MAP
+from game import new_game, move_player, items_at_location, collect_item, restore_beacon, ISLAND_MAP
 
 
 class TestMysteryIsland(unittest.TestCase):
@@ -83,6 +83,53 @@ class TestMysteryIsland(unittest.TestCase):
         self.assertTrue(result)
         self.assertIn("Lantern", self.player["inventory"])
 
+    def test_lighthouse_is_locked_without_rope(self):
+        player = new_game("Regina")
+        player["location"] = "Old Bridge"
+
+        result = move_player(player, "Lighthouse")
+
+        self.assertFalse(result)
+        self.assertEqual(player["location"], "Old Bridge")
+
+    def test_lighthouse_can_be_reached_with_rope(self):
+        player = new_game("Regina")
+        player["location"] = "Old Bridge"
+        player["inventory"].append("Rope")
+
+        result = move_player(player, "Lighthouse")
+
+        self.assertTrue(result)
+        self.assertEqual(player["location"], "Lighthouse")
+
+    def test_beacon_cannot_be_restored_without_lantern(self):
+        player = new_game("Regina")
+        player["location"] = "Lighthouse"
+
+        result = restore_beacon(player)
+
+        self.assertFalse(result)
+        self.assertFalse(player["won"])
+
+    def test_beacon_cannot_be_restored_outside_lighthouse(self):
+        player = new_game("Regina")
+        player["inventory"].append("Lantern")
+
+        result = restore_beacon(player)
+
+        self.assertFalse(result)
+        self.assertFalse(player["won"])
+
+    def test_beacon_restoration_wins_game(self):
+        player = new_game("Regina")
+        player["location"] = "Lighthouse"
+        player["inventory"].extend(["Rope", "Lantern"])
+
+        result = restore_beacon(player)
+
+        self.assertTrue(result)
+        self.assertTrue(player["won"])
+        self.assertTrue(player["game_over"])
 
 if __name__ == "__main__":
     unittest.main()

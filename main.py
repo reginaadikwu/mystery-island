@@ -1,4 +1,3 @@
-
 from game import (
     new_game,
     display_instructions,
@@ -25,7 +24,8 @@ def main():
         print("1. View player status")
         print("2. Move to another location")
         print("3. Collect an item")
-        print("4. Quit game")
+        print("4. Restore lighthouse beacon")
+        print("5. Quit game")
 
         action = input("Choose an option: ").strip()
 
@@ -62,4 +62,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

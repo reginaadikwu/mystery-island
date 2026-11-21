@@ -8,19 +8,20 @@ The player wakes up on an island after a storm. To get rescued, they must explor
 
 ## Current Features
 
-- Player name input
-- Player status display
-- Five island locations
-- Connected-location movement
-- Movement validation
-- Energy tracking
-- Invalid menu input handling
-- Case-insensitive destination names- Item collection system
-- Rope available at the Beach
-- Lantern available in the Cave
-- Inventory tracking
+- Player name and game initialization
+- Player status tracking
+- Five connected island locations
+- Location-based movement
+- Energy system
+- Inventory system
+- Rope collection at the Beach
+- Lantern collection in the Cave
 - Duplicate item collection prevention
-- Item availability validation
+- Location-based item validation
+- Lighthouse access restricted by Rope
+- Beacon restoration requires Lantern
+- Winning condition when the beacon is restored
+- Invalid input handling
 
 ## Island Map
 
@@ -59,6 +60,8 @@ Stage 1: Game setup and menu — completed.
 Stage 2: Island locations and movement — completed.
 
 Stage 3: Inventory, Rope, and Lantern — completed.
+
+Stage 4: Locked Lighthouse and wining condition — completed
 
 ## Planned Features
 

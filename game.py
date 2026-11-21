@@ -1,4 +1,3 @@
-
 # Island map: each location connects only to its listed neighbors.
 ISLAND_MAP = {
     "Beach": ["Jungle"],
@@ -37,16 +36,22 @@ def display_instructions():
 
 def available_actions():
     """Return the menu choices available to the player."""
-    return ["1", "2", "3", "4"]
+    return ["1", "2", "3", "4", "5"]
 
 
 def move_player(player, destination):
-    """Move the player if the destination is connected."""
+    """Move the player if the destination is connected and accessible."""
     current_location = player["location"]
     destination = destination.strip().title()
 
     if destination not in ISLAND_MAP[current_location]:
         print(f"\nYou cannot travel from {current_location} to {destination}.")
+        return False
+
+    # The Rope is required to cross to the Lighthouse.
+    if destination == "Lighthouse" and "Rope" not in player["inventory"]:
+        print("\nThe bridge is too damaged to cross safely!")
+        print("You need a Rope to reach the Lighthouse.")
         return False
 
     if player["energy"] <= 0:
@@ -90,6 +95,29 @@ def collect_item(player, item):
     return True
 
 
+def restore_beacon(player):
+    """Restore the lighthouse beacon if the player has the Lantern."""
+    if player["location"] != "Lighthouse":
+        print("\nYou must be at the Lighthouse to restore the beacon.")
+        return False
+
+    if "Lantern" not in player["inventory"]:
+        print("\nThe lighthouse beacon is too dark to restore.")
+        print("You need the Lantern.")
+        return False
+
+    print("\nYou use the Lantern to restore the lighthouse beacon!")
+    print("The bright light shines across the ocean.")
+    print("A rescue boat sees the signal and heads toward the island.")
+    print("\nCONGRATULATIONS!")
+    print(f"{player['name']} has escaped Mystery Island!")
+
+    player["won"] = True
+    player["game_over"] = True
+
+    return True
+
+
 def apply_action(player, action, destination=None, item=None):
     """Process the player's menu choice."""
     if action == "1":
@@ -118,11 +146,13 @@ def apply_action(player, action, destination=None, item=None):
             for available_item in available_items:
                 print(f"- {available_item}")
             print("\nYou must specify an item.")
-            
+
     elif action == "4":
+        restore_beacon(player)
+
+    elif action == "5":
         player["game_over"] = True
         print("\nThanks for playing. Goodbye!")
 
     else:
-        print("\nInvalid choice. Please select 1, 2, 3, or 4.")
-
+        print("\nInvalid choice. Please select 1, 2, 3, 4, or 5.")
