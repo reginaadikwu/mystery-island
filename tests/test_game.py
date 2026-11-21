@@ -48,5 +48,41 @@ class TestMysteryIsland(unittest.TestCase):
         self.assertEqual(self.player["energy"], 0)
 
 
+    def test_rope_can_be_collected_at_beach(self):
+        from game import collect_item
+
+        result = collect_item(self.player, "Rope")
+
+        self.assertTrue(result)
+        self.assertIn("Rope", self.player["inventory"])
+
+    def test_rope_cannot_be_collected_twice(self):
+        from game import collect_item
+
+        collect_item(self.player, "Rope")
+        result = collect_item(self.player, "Rope")
+
+        self.assertFalse(result)
+        self.assertEqual(self.player["inventory"].count("Rope"), 1)
+
+    def test_lantern_cannot_be_collected_at_beach(self):
+        from game import collect_item
+
+        result = collect_item(self.player, "Lantern")
+
+        self.assertFalse(result)
+        self.assertNotIn("Lantern", self.player["inventory"])
+
+    def test_lantern_can_be_collected_in_cave(self):
+        from game import collect_item
+
+        self.player["location"] = "Cave"
+
+        result = collect_item(self.player, "Lantern")
+
+        self.assertTrue(result)
+        self.assertIn("Lantern", self.player["inventory"])
+
+
 if __name__ == "__main__":
     unittest.main()

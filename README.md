@@ -15,7 +15,12 @@ The player wakes up on an island after a storm. To get rescued, they must explor
 - Movement validation
 - Energy tracking
 - Invalid menu input handling
-- Case-insensitive destination names
+- Case-insensitive destination names- Item collection system
+- Rope available at the Beach
+- Lantern available in the Cave
+- Inventory tracking
+- Duplicate item collection prevention
+- Item availability validation
 
 ## Island Map
 
@@ -47,18 +52,22 @@ python3 -m unittest discover -s tests -v
 1. View player status
 2. Move to another location
 3. Quit game
-
 ## Current Development Stage
 
 Stage 1: Game setup and menu — completed.
 
-Stage 2: Island locations and movement — implemented and tested.
+Stage 2: Island locations and movement — completed.
+
+Stage 3: Inventory, Rope, and Lantern — completed.
 
 ## Planned Features
 
 - Item collection and inventory
 - Rope and lantern
 - Bridge access restrictions
+- Lighthouse restoration
+- Energy-based win and lose conditions
+- Replay functionality- Bridge access restrictions
 - Lighthouse restoration
 - Energy-based win and lose conditions
 - Replay functionality

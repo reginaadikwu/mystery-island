@@ -8,6 +8,12 @@ ISLAND_MAP = {
     "Lighthouse": ["Old Bridge"]
 }
 
+# Items that can be discovered at different locations.
+ITEM_LOCATIONS = {
+    "Beach": "Rope",
+    "Cave": "Lantern"
+}
+
 
 def new_game(name):
     """Create a new player and return the initial game state."""
@@ -31,14 +37,12 @@ def display_instructions():
 
 def available_actions():
     """Return the menu choices available to the player."""
-    return ["1", "2", "3"]
+    return ["1", "2", "3", "4"]
 
 
 def move_player(player, destination):
     """Move the player if the destination is connected."""
     current_location = player["location"]
-
-    # Normalize the destination to avoid case-sensitive mistakes.
     destination = destination.strip().title()
 
     if destination not in ISLAND_MAP[current_location]:
@@ -58,7 +62,35 @@ def move_player(player, destination):
     return True
 
 
-def apply_action(player, action, destination=None):
+def items_at_location(player):
+    """Return items available at the player's current location."""
+    location = player["location"]
+
+    if location in ITEM_LOCATIONS:
+        item = ITEM_LOCATIONS[location]
+
+        if item not in player["inventory"]:
+            return [item]
+
+    return []
+
+
+def collect_item(player, item):
+    """Collect an item if it is available at the current location."""
+    item = item.strip().title()
+    available_items = items_at_location(player)
+
+    if item not in available_items:
+        print(f"\n{item} is not available here.")
+        return False
+
+    player["inventory"].append(item)
+
+    print(f"\nYou collected the {item}!")
+    return True
+
+
+def apply_action(player, action, destination=None, item=None):
     """Process the player's menu choice."""
     if action == "1":
         print(f"\nPlayer: {player['name']}")
@@ -73,9 +105,24 @@ def apply_action(player, action, destination=None):
             print("\nYou must enter a destination.")
 
     elif action == "3":
+        available_items = items_at_location(player)
+
+        if not available_items:
+            print("\nThere are no items available to collect here.")
+
+        elif item:
+            collect_item(player, item)
+
+        else:
+            print("\nItems available:")
+            for available_item in available_items:
+                print(f"- {available_item}")
+            print("\nYou must specify an item.")
+            
+    elif action == "4":
         player["game_over"] = True
         print("\nThanks for playing. Goodbye!")
 
     else:
-        print("\nInvalid choice. Please select 1, 2, or 3.")
+        print("\nInvalid choice. Please select 1, 2, 3, or 4.")
 
