@@ -71,6 +71,7 @@ python3 -m unittest discover -s tests -v
 - Stage 4: Lighthouse access and winning condition — completed
 - Stage 5: Energy and survival system — completed
 - Stage 6: Replay system and fresh game sessions — completed
+- Stage 7: Game experience improvements and input handling — completed
 
 ## Stage 5: Energy and Survival System
 
@@ -133,3 +134,33 @@ This project practices:
 - Debugging
 - Git and GitHub version control
 
+## Stage 7: Game Experience Improvements
+
+Stage 7 focused on improving the player's experience through clearer feedback, better input handling, and more reliable navigation.
+
+### Improvements
+
+- Invalid movement displays the available connected locations.
+- Empty destination input is handled with a helpful message.
+- Invalid menu choices are rejected with clear instructions.
+- Unexpected menu input returns the player safely to the main menu.
+- Valid movement continues to work correctly with energy deduction.
+
+### Input Handling
+
+The game now provides clearer feedback when the player enters an invalid menu option, an empty destination, or an inaccessible location.
+
+Instead of leaving the player confused, the game explains the problem and allows them to try again.
+
+### Testing
+
+- Tested invalid menu input using text, zero, and empty input.
+- Tested empty movement destination.
+- Tested valid movement between connected locations.
+- Verified player location and energy after movement.
+- Ran the full automated test suite successfully.
+- Confirmed all 18 automated tests passed.
+
+### Stage 7 Outcome
+
+The game is more user-friendly, handles invalid input more clearly, and maintains its existing gameplay functionality.

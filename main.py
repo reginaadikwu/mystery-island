@@ -32,7 +32,12 @@ def play_game(player):
                 "\nWhere would you like to go? "
             ).strip()
 
-            apply_action(player, action, destination)
+            if not destination:
+                print("\nDestination cannot be empty.")
+                print("Please choose one of the connected locations.")
+            else:
+                apply_action(player, action, destination)
+
 
         elif action == "3":
             available_items = items_at_location(player)

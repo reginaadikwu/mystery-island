@@ -33,11 +33,6 @@ def display_instructions():
     print("restore the lighthouse beacon and get rescued.")
     print("Be careful: your energy is limited!")
 
-
-def available_actions():
-    """Return the menu choices available to the player."""
-    return ["1", "2", "3", "4", "5"]
-
 def move_player(player, destination):
     """Move the player if the destination is connected and accessible."""
     current_location = player["location"]
@@ -45,6 +40,11 @@ def move_player(player, destination):
 
     if destination not in ISLAND_MAP[current_location]:
         print(f"\nYou cannot travel from {current_location} to {destination}.")
+        print(f"\nFrom {current_location}, you can travel to:")
+
+        for location in ISLAND_MAP[current_location]:
+            print(f"- {location}")
+
         return False
 
     if destination == "Lighthouse" and "Rope" not in player["inventory"]:
@@ -69,6 +69,7 @@ def move_player(player, destination):
         print("GAME OVER.")
 
     return True
+
 
 def items_at_location(player):
     """Return items available at the player's current location."""
@@ -156,6 +157,6 @@ def apply_action(player, action, destination=None, item=None):
     elif action == "5":
         player["game_over"] = True
         print("\nThanks for playing. Goodbye!")
-
     else:
-        print("\nInvalid choice. Please select 1, 2, 3, 4, or 5.")
+        print("\nInvalid choice.")
+        print("Please select an option from 1 to 5.")
