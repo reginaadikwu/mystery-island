@@ -38,7 +38,6 @@ def available_actions():
     """Return the menu choices available to the player."""
     return ["1", "2", "3", "4", "5"]
 
-
 def move_player(player, destination):
     """Move the player if the destination is connected and accessible."""
     current_location = player["location"]
@@ -48,7 +47,6 @@ def move_player(player, destination):
         print(f"\nYou cannot travel from {current_location} to {destination}.")
         return False
 
-    # The Rope is required to cross to the Lighthouse.
     if destination == "Lighthouse" and "Rope" not in player["inventory"]:
         print("\nThe bridge is too damaged to cross safely!")
         print("You need a Rope to reach the Lighthouse.")
@@ -64,8 +62,13 @@ def move_player(player, destination):
     print(f"\nYou traveled to {destination}.")
     print(f"Energy remaining: {player['energy']}")
 
-    return True
+    if player["energy"] == 0 and not player["won"]:
+        player["game_over"] = True
+        print("\nYou have run out of energy!")
+        print("You could not escape Mystery Island.")
+        print("GAME OVER.")
 
+    return True
 
 def items_at_location(player):
     """Return items available at the player's current location."""

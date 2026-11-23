@@ -131,5 +131,26 @@ class TestMysteryIsland(unittest.TestCase):
         self.assertTrue(player["won"])
         self.assertTrue(player["game_over"])
 
+    def test_player_loses_when_energy_reaches_zero(self):
+        player = new_game("Regina")
+        player["energy"] = 1
+
+        result = move_player(player, "Jungle")
+
+        self.assertTrue(result)
+        self.assertEqual(player["energy"], 0)
+        self.assertTrue(player["game_over"])
+        self.assertFalse(player["won"])
+
+    def test_player_can_continue_with_energy_remaining(self):
+        player = new_game("Regina")
+        player["energy"] = 2
+
+        result = move_player(player, "Jungle")
+
+        self.assertTrue(result)
+        self.assertEqual(player["energy"], 1)
+        self.assertFalse(player["game_over"])
+
 if __name__ == "__main__":
     unittest.main()
