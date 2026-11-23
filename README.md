@@ -78,3 +78,24 @@ Stage 4: Locked Lighthouse and wining condition — completed
 ## Learning Objectives
 
 This project practices Python variables, dictionaries, lists, functions, conditionals, loops, input validation, and automated testing.
+
+### Stage 5: Energy and Survival System
+
+The game now includes an energy system that makes player decisions more important and adds a survival challenge.
+
+**Energy rules:**
+- The player begins with 5 energy.
+- Every successful movement consumes 1 energy.
+- Invalid movement does not consume energy.
+- The player cannot move when energy reaches 0.
+- Running out of energy before escaping results in Game Over.
+
+**Survival and game outcomes:**
+- Players must plan their route carefully.
+- Collecting items does not consume energy.
+- The player can win by collecting the Rope and Lantern, reaching the Lighthouse, and restoring its beacon before running out of energy.
+- The game supports both winning and losing outcomes.
+
+**Testing:**
+- Automated tests verify energy consumption, energy exhaustion, movement restrictions, and survival behavior.
+- Manual gameplay confirmed both the losing path and successful rescue path.
