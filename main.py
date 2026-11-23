@@ -7,18 +7,8 @@ from game import (
 )
 
 
-def main():
-    display_instructions()
-
-    name = input("\nWhat is your name? ").strip()
-
-    if not name:
-        name = "Explorer"
-
-    player = new_game(name)
-
-    print(f"\nWelcome, {player['name']}!")
-
+def play_game(player):
+    """Run the main gameplay loop for one session."""
     while not player["game_over"]:
         print("\n===== MAIN MENU =====")
         print("1. View player status")
@@ -38,7 +28,9 @@ def main():
             for destination in destinations:
                 print(f"- {destination}")
 
-            destination = input("\nWhere would you like to go? ").strip()
+            destination = input(
+                "\nWhere would you like to go? "
+            ).strip()
 
             apply_action(player, action, destination)
 
@@ -47,17 +39,45 @@ def main():
 
             if available_items:
                 print("\nItems available:")
+
                 for item in available_items:
                     print(f"- {item}")
 
-                item = input("\nWhat would you like to collect? ").strip()
+                item = input(
+                    "\nWhat would you like to collect? "
+                ).strip()
 
                 apply_action(player, action, item=item)
+
             else:
                 apply_action(player, action)
 
         else:
             apply_action(player, action)
+
+
+def main():
+    display_instructions()
+
+    while True:
+        name = input("\nWhat is your name? ").strip()
+
+        if not name:
+            name = "Explorer"
+
+        player = new_game(name)
+
+        print(f"\nWelcome, {player['name']}!")
+
+        play_game(player)
+
+        replay = input(
+            "\nWould you like to play again? (yes/no): "
+        ).strip().lower()
+
+        if replay not in ("yes", "y"):
+            print("\nThanks for playing Mystery Island!")
+            break
 
 
 if __name__ == "__main__":
