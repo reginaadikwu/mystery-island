@@ -1,9 +1,13 @@
+import os
 from flask import send_from_directory
 from flask import Flask, render_template, request, redirect, url_for, session
 from game import new_game, move_player, items_at_location, collect_item, restore_beacon
 
 app = Flask(__name__)
-app.secret_key = "mystery-island-dev-key"
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "local-development-only-secret"
+)
 
 
 @app.route("/")

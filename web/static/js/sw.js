@@ -1,10 +1,12 @@
-const CACHE_NAME = "mystery-island-v1";
+const CACHE_NAME = "mystery-island-v2";
 
 const ASSETS = [
     "/",
     "/static/css/style.css",
     "/static/manifest.json",
-    "/static/images/icon.svg"
+    "/static/images/icon.svg",
+    "/static/images/icon-192.png",
+    "/static/images/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
