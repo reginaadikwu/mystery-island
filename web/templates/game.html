@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystery Island Adventure</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#102f46">
+</head>
+
+<body>
+
+    <main class="game-container">
+
+        <h1 class="game-title">🏝️ Mystery Island</h1>
+
+        <section class="player-panel">
+            <p>👤 Explorer: {{ player.name }}</p>
+            <p>⚡ Energy: {{ player.energy }}/5</p>
+            <p>📍 Location: {{ player.location }}</p>
+            <p>🎒 Inventory:
+                {% if player.inventory %}
+                    {{ player.inventory | join(", ") }}
+                {% else %}
+                    Empty
+                {% endif %}
+            </p>
+        </section>
+
+        <section class="story-panel">
+
+            <h2>{{ player.location }}</h2>
+
+            {% if player.won %}
+
+                <h3>🎉 You escaped!</h3>
+                <p>You restored the lighthouse beacon. A rescue boat found you!</p>
+
+                <a href="/">Return Home</a>
+
+            {% elif player.game_over %}
+
+                <h3>Adventure Over</h3>
+                <p>Your adventure has ended.</p>
+                <a href="/">Return Home</a>
+
+            {% else %}
+
+                <p>You are exploring Mystery Island.</p>
+
+                {% if available_items %}
+                    <h3>Items found here</h3>
+
+                    {% for item in available_items %}
+                        <form action="/collect" method="POST">
+                            <button class="start-button" type="submit">
+                                Collect {{ item }}
+                            </button>
+                        </form>
+                    {% endfor %}
+                {% endif %}
+
+                <h3>Explore</h3>
+
+                {% if player.location == "Beach" %}
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Jungle">
+                        <button class="start-button" type="submit">Explore Jungle</button>
+                    </form>
+
+                {% elif player.location == "Jungle" %}
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Beach">
+                        <button class="start-button" type="submit">Return to Beach</button>
+                    </form>
+
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Cave">
+                        <button class="start-button" type="submit">Explore Cave</button>
+                    </form>
+
+                {% elif player.location == "Cave" %}
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Jungle">
+                        <button class="start-button" type="submit">Return to Jungle</button>
+                    </form>
+
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Old Bridge">
+                        <button class="start-button" type="submit">Explore Old Bridge</button>
+                    </form>
+
+                {% elif player.location == "Old Bridge" %}
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Cave">
+                        <button class="start-button" type="submit">Return to Cave</button>
+                    </form>
+
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Lighthouse">
+                        <button class="start-button" type="submit">Go to Lighthouse</button>
+                    </form>
+
+                {% elif player.location == "Lighthouse" %}
+                    <form action="/move" method="POST">
+                        <input type="hidden" name="destination" value="Old Bridge">
+                        <button class="start-button" type="submit">Return to Old Bridge</button>
+                    </form>
+
+                    <form action="/restore" method="POST">
+                        <button class="start-button" type="submit">Restore Beacon</button>
+                    </form>
+
+                {% endif %}
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("App support enabled."))
+            .catch(error => console.error(error));
+    }
+</script>
+
+</body>
+</html>

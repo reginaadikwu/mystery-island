@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Begin Adventure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="game-container">
+        <h1 class="game-title">Prepare for Adventure</h1>
+
+        <section class="story-panel">
+            <p>Before you begin your adventure, what should we call you?</p>
+
+            <form action="/start" method="POST">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    maxlength="30"
+                    class="name-input"
+                >
+
+                <button class="start-button" type="submit">
+                    Begin Adventure
+                </button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

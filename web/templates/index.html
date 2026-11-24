@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystery Island: The Lost Lighthouse</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#102f46">
+</head>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/sw.js")
+                .then(() => console.log("Mystery Island is ready for offline support."))
+                .catch(error => console.error("Service worker error:", error));
+        });
+    }
+</script>
+
+<body>
+
+    <main class="game-container">
+
+        <h1 class="game-title">Mystery Island</h1>
+
+        <p class="subtitle">The Lost Lighthouse</p>
+
+        <section class="story-panel">
+            <p>You have awakened on a mysterious island.</p>
+
+            <p>
+                Explore the island, collect useful items,
+                restore the lighthouse beacon, and find your way home.
+            </p>
+
+            <form action="/start" method="GET">
+                <button class="start-button" type="submit">Start New Game</button>
+            </form>
+        </section>
+
+    </main>
+
+</body>
+</html>

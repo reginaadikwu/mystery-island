@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #071827;
+    color: #f5f5f5;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 24px;
+    background: linear-gradient(180deg, #102f46, #071827);
+}
+
+.game-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 24px;
+}
+
+.story-panel {
+    margin-top: 40px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    line-height: 1.8;
+}
+
+.story-panel p {
+    margin-bottom: 16px;
+}
+
+.start-button {
+    display: block;
+    width: 100%;
+    margin-top: 28px;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    background: #f0b44c;
+    color: #102030;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background: #ffd477;
+}
+
+.subtitle {
+    text-align: center;
+    color: #b8c9d8;
+}
+.player-panel {
+    display: grid;
+    gap: 12px;
+    margin-top: 25px;
+    padding: 18px;
+    background: #183b52;
+    border-radius: 14px;
+    border: 1px solid #31566c;
+}
+
+.player-panel p {
+    font-size: 15px;
+}
+
+.story-panel h2 {
+    margin-bottom: 18px;
+    color: #f0b44c;
+}
+
+.story-panel h3 {
+    margin-top: 25px;
+}
+.start-button {
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.name-input {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #31566c;
+    background: #071827;
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.game-container {
+    padding-bottom: 40px;
+}
